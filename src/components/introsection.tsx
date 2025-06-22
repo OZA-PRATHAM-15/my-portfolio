@@ -48,7 +48,7 @@ export default function IntroSection() {
               src="https://firebasestorage.googleapis.com/v0/b/carbuyingapp-4883c.appspot.com/o/Image%20profile.jpg?alt=media&token=30db5a14-cbc3-488e-8133-df5d10cfb78f"
               alt="Pratham"
               width={300}
-              height={400}
+              height={420}
               style={{ borderRadius: "12px", objectFit: "cover", width: "100%" }}
             />
             <Typography

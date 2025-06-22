@@ -1,6 +1,6 @@
 "use client";
-
 import React, { useState, useEffect } from "react";
+import styles from "../theme/flipping-card.module.css";
 import {
   Box,
   Typography,
@@ -8,10 +8,11 @@ import {
   Button,
   IconButton,
   useMediaQuery,
+  CircularProgress,
 } from "@mui/material";
-import { motion } from "framer-motion";
-import { LinkedIn, Email, FileDownload, EmojiEmotions } from "@mui/icons-material";
-import SendIcon from "@mui/icons-material/Send";
+import { LinkedIn, Email, PictureAsPdf } from "@mui/icons-material";
+import { Plane } from "lucide-react";
+import toast from "react-hot-toast";
 
 const prompts = [
   "Want to start a project?",
@@ -24,101 +25,194 @@ const prompts = [
 
 export default function ContactMeSection() {
   const [index, setIndex] = useState(0);
-  const [flip, setFlip] = useState(false);
+  const [flipFront, setFlipFront] = useState(true);
+  const [rotation, setRotation] = useState(0);
   const isMobile = useMediaQuery("(max-width: 768px)");
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFlip(true);
-      setTimeout(() => {
-        setIndex((prev) => (prev + 1) % prompts.length);
-        setFlip(false);
-      }, 300);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+useEffect(() => {
+  const interval = setInterval(() => {
+    setRotation((prev) => prev + 180);
+    setTimeout(() => {
+      setFlipFront((prev) => !prev);
+      setIndex((prev) => (prev + 1) % prompts.length);
+    }, 1000);
+  }, 3000);
+
+  return () => clearInterval(interval);
+}, []);
+
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  if (!formData.name || !formData.email || !formData.message) return;
+
+  setLoading(true);
+
+  try {
+    const response = await fetch("https://formspree.io/f/xovwngqb", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      }),
+    });
+
+    const result = await response.json();
+    if (result.ok || response.status === 200) {
+      setSubmitted(true);
+      setFormData({ name: "", email: "", message: "" });
+      toast.success("Message sent successfully!");
+    } else {
+      toast.error("Failed to send message. Try again later.");
+    }
+    } catch (err) {
+      console.error("Formspree error:", err);
+      toast.error("An error occurred. Please try again.");
+    }
+
+  setLoading(false);
+};
+
 
   return (
     <Box
       sx={{
-        minHeight: "100vh",
-        px: { xs: 2, md: 10 },
-        py: 10,
+        minHeight: "100dvh",
+        px: { xs: 2, md: 5, lg: 1 },
+        py: 1 ,
         display: "flex",
         flexDirection: { xs: "column", md: "row" },
-        gap: 6,
+        gap: 5,
         alignItems: "center",
         justifyContent: "center",
         fontFamily: `"Poppins", sans-serif`,
-        background: "#f5f5f5",
       }}
     >
-      {/* Flipping Card Section */}
-      <Box sx={{ width: isMobile ? "100%" : "45%", perspective: "1000px" }}>
-        <motion.div
-          animate={{ rotateY: flip ? 180 : 0 }}
-          transition={{ duration: 0.6 }}
-          style={{
-            width: "100%",
-            minHeight: "280px",
-            borderRadius: "16px",
-            background: "#fff",
-            boxShadow: "0px 10px 30px rgba(0,0,0,0.1)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            transformStyle: "preserve-3d",
-            fontFamily: `'Playfair Display', serif`,
-            fontSize: "2rem",
-            padding: "2rem",
-          }}
+      <Box className={styles.cardWrapper} sx={{ width: isMobile ? "100%" : "45%" }}>
+        <div
+          className={styles.card}
+          style={{ transform: `rotateY(${rotation}deg)` }}
         >
-          <span>{prompts[index]}</span>
-        </motion.div>
+          <div className={styles.face}>
+            {flipFront ? prompts[index] : prompts[(index + 1) % prompts.length]}
+          </div>
+          <div className={`${styles.face} ${styles.back}`}>
+            {flipFront ? prompts[(index + 1) % prompts.length] : prompts[index]}
+          </div>
+        </div>
       </Box>
 
-      {/* Form + Social Icons */}
-      <Box sx={{ width: isMobile ? "100%" : "45%", display: "flex", flexDirection: "column", gap: 3 }}>
-        <Box>
-          <Typography variant="h5" fontWeight={600} sx={{ fontFamily: "'Poppins', sans-serif", mb: 1 }}>
-            Connect With Me
-          </Typography>
-          <Box display="flex" gap={2}>
-            <IconButton href="mailto:ozapratham15@gmail.com" target="_blank" sx={{ color: "#000" }}>
-              <Email />
-            </IconButton>
-            <IconButton href="https://www.linkedin.com/in/pratham-oza15" target="_blank" sx={{ color: "#0077b5" }}>
-              <LinkedIn />
-            </IconButton>
-            <IconButton href="/Pratham_Resume.pdf" download sx={{ color: "#222" }}>
-              <FileDownload />
-            </IconButton>
-            <IconButton sx={{ color: "#ff9800" }}>
-              <EmojiEmotions />
-            </IconButton>
-          </Box>
-        </Box>
+      <Box sx={{ width: isMobile ? "100%" : "45%", display: "flex", flexDirection: "column", gap: 1 }}>
+        <Typography variant="h5" fontWeight={400} sx={{ fontFamily: "'Poppins', sans-serif" }}>
+          Connect With Me
+        </Typography>
 
-        <Box
-          component="form"
-          action="mailto:ozapratham15@gmail.com"
-          method="POST"
-          encType="text/plain"
+      <Box display="flex" gap={2} marginBottom={2} flexWrap="wrap">
+        <IconButton
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=pratham.oza10@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-            mt: 2,
+            backgroundColor: "#fff",
+            color: "#D44638",
+            borderRadius: "30%",
+            mt: 3,
+            border: "2px solid #D44638",
+            padding: 1,
+            "&:hover": {
+              backgroundColor: "#fbeae9",
+            },
           }}
         >
-          <TextField label="Your Name" name="name" variant="outlined" required fullWidth InputProps={{ sx: { borderRadius: "12px" } }} />
-          <TextField label="Your Email" name="email" type="email" variant="outlined" required fullWidth InputProps={{ sx: { borderRadius: "12px" } }} />
-          <TextField label="Your Message" name="message" multiline rows={4} variant="outlined" required fullWidth InputProps={{ sx: { borderRadius: "12px" } }} />
+          <Email fontSize="small" />
+        </IconButton>
+        
+        <IconButton
+          href="https://www.linkedin.com/in/pratham-oza15"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            backgroundColor: "#fff",
+            color: "#0077B5",
+            borderRadius: "30%",
+            mt: 3,
+            border: "2px solid #0077B5",
+            padding: 1,
+            "&:hover": {
+              backgroundColor: "#e6f4f9",
+            },
+          }}
+        >
+          <LinkedIn fontSize="small" />
+        </IconButton>
+        
+        <IconButton
+          href="https://firebasestorage.googleapis.com/v0/b/carbuyingapp-4883c.appspot.com/o/Resume%20Pratham_Oza.pdf?alt=media&token=f8c4d585-27b2-4499-9690-df00f630fadf"
+          target="_blank"
+          rel="noopener noreferrer"
+          download
+          sx={{
+            backgroundColor: "#fff",
+            color: "#333",
+            borderRadius: "30%",
+            mt: 3,
+            border: "2px solid #333",
+            padding: 1,
+            "&:hover": {
+              backgroundColor: "#f0f0f0",
+            },
+          }}
+        >
+          <PictureAsPdf fontSize="small" />
+        </IconButton>
+      </Box>
+
+        <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <TextField
+            label="Your Name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            fullWidth
+          />
+          <TextField
+            label="Your Email"
+            name="email"
+            type="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            fullWidth
+          />
+          <TextField
+            label="Your Message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            multiline
+            rows={4}
+            required
+            fullWidth
+          />
           <Button
             type="submit"
             variant="contained"
-            endIcon={<SendIcon />}
+            endIcon={loading ? <CircularProgress size={20} color="inherit" /> : <Plane size={18} />}
             sx={{
               borderRadius: "12px",
               fontWeight: 600,
@@ -126,11 +220,12 @@ export default function ContactMeSection() {
               background: "#000",
               ":hover": { background: "#333" },
             }}
+            disabled={!formData.name || !formData.email || !formData.message || loading || submitted}
           >
-            Send Message
+            {submitted ? "Sent!" : "Send Message"}
           </Button>
         </Box>
       </Box>
-    </Box>
+  </Box>
   );
 }

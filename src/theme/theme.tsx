@@ -9,8 +9,8 @@ const theme = createTheme({
       main: "#ffffff",
     },
     background: {
-      default: "#f4f7fa",  
-      paper: "#ffffff",  
+      default: "linear-gradient(to bottom,rgb(221, 231, 235),rgb(255, 255, 255))",
+      paper: "linear-gradient(to bottom,rgb(255, 255, 255),rgb(255, 255, 255))",
     },
     text: {
       primary: "#181818",

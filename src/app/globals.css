@@ -4,7 +4,6 @@ body {
   font-family: 'Arial', sans-serif;
 }
 
-
 html, body {
   background: #fff;
   color: #181818;
@@ -30,3 +29,4 @@ html, body {
 .swiper-wrapper {
     overflow: visible !important;
 }
+

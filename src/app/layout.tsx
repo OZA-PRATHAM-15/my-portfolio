@@ -4,6 +4,7 @@ import theme from "@/theme/theme";
 import "../app/globals.css";
 import ProgressBar from "@/components/progressbar";
 import { ReactNode } from "react";
+import { Toaster } from "react-hot-toast";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
 
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <ProgressBar />
+          <Toaster position="bottom-right" reverseOrder={false} />
           <div suppressHydrationWarning>
           {children}
           </div>

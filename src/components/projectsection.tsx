@@ -184,11 +184,12 @@ export default function ProjectSection(): React.ReactElement {
                   lg: "440px",   
                 },
                   maxHeight: "1000px",
-                  border: "2px solid transparent",
+                  borderRadius: "20px",
+                  border: "2px solid #3B82F6",
                   backgroundImage: "linear-gradient(#fff, #fff), linear-gradient(45deg, #000000, #444444)",
                   backgroundOrigin: "border-box",
                   backgroundClip: "content-box, border-box",
-                  boxShadow: "0px 4px 20px rgba(0,0,0,0.1)",
+                  boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
                   transition: "transform 0.4s ease, box-shadow 0.4s ease",
                   ":hover": {
                     transform: "scale(1.01)",
@@ -201,6 +202,7 @@ export default function ProjectSection(): React.ReactElement {
                   src={project.image}
                   alt={project.title}
                   sx={{
+                    borderRadius: "10px 10px 10px 10px",
                     width: "100%",
                     height: "100%",
                     maxHeight: "220px",    
