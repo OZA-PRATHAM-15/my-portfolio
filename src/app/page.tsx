@@ -30,41 +30,55 @@ export default function Home() {
       <div suppressHydrationWarning>
         <Navbar />
       </div>
-      <div suppressHydrationWarning>
-        <Box sx={{ mt: { xs: 2, sm: 1, md: 1 } }}>
-          <HeroSection />
-        </Box>
+      <section id="home">
+        <div suppressHydrationWarning>
+          <Box sx={{ mt: { xs: 2, sm: 1, md: 1 } }}>
+            <HeroSection />
+          </Box>
+        </div>
+      </section>
+      <section id="about">
         <div suppressHydrationWarning>
           <Box sx={{ mt: { xs: 12, sm: 14, md: 15 }, mb: 2 }}>
             <IntroSection />
           </Box>
         </div>
+      </section>
+      <section id="skills">
         <div suppressHydrationWarning>
           <Box sx={{ mt: { xs: 16, sm: 14, md: 15}, mb: 1 }}>
             <SkillSection />
           </Box>
         </div>
+      </section>
+      <section id="experience">
         <div suppressHydrationWarning>
           <Box sx={{ mt: { xs: 16, sm: 14, md: 5 } , mb: 2 }}>
             <ExperienceSection />
           </Box>
         </div>
+      </section>
+      <section id="projects">
         <div suppressHydrationWarning>
           <Box sx={{ mt: { xs: 10, sm: 14, md: 15 }, mb: 2 }}>
             <ProjectSection />
           </Box>
         </div>
+      </section>
+      <section id="honorable-mentions">
         <div suppressHydrationWarning>
           <Box sx={{ mt: { xs: 10, sm: 14, md: 10 }, mb: 12 }}>
           <HonorableMentionsSection />
           </Box>
         </div>
+      </section>
+      <section id="contact">
         <div suppressHydrationWarning>
           <Box sx={{ mt: { xs: 10, sm: 1, md: 1 },  }}>
             <ContactMeSection />
           </Box>
         </div>
-      </div>
-    </Box>
+      </section>
+      </Box>
   );
 }

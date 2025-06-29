@@ -13,6 +13,9 @@ import {
 import { LinkedIn, Email, PictureAsPdf } from "@mui/icons-material";
 import { Plane } from "lucide-react";
 import toast from "react-hot-toast";
+import { Markunread } from "@mui/icons-material";
+import PersonIcon from '@mui/icons-material/Person';
+import MessageIcon from '@mui/icons-material/Message';
 
 const prompts = [
   "Want to start a project?",
@@ -186,33 +189,45 @@ const handleSubmit = async (e: React.FormEvent) => {
       </Box>
 
         <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          <TextField
-            label="Your Name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            fullWidth
-          />
-          <TextField
-            label="Your Email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            fullWidth
-          />
-          <TextField
-            label="Your Message"
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            multiline
-            rows={4}
-            required
-            fullWidth
-          />
+
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <PersonIcon sx={{ color: "#000" }} />
+            <TextField
+              label="Your Name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              fullWidth
+            />
+          </Box>
+
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <Email sx={{ color: "#000" }} />
+            <TextField
+              label="Your Email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              fullWidth
+            />
+          </Box>
+
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1, }}>
+            <MessageIcon sx={{ color: "#000" }} />
+            <TextField
+              label="Your Message"
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
+              multiline
+              rows={4}
+              required
+              fullWidth
+            />
+          </Box>
           <Button
             type="submit"
             variant="contained"

@@ -1,9 +1,11 @@
 "use client";
 
-import { Box, Typography, MenuItem, Select, Button,IconButton } from "@mui/material";
+import { Box, Typography, MenuItem, Select, Button,IconButton, Modal } from "@mui/material";
 import { useEffect, useState } from "react";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import CloseIcon from "@mui/icons-material/Close";
 
 const typeValues = [
   "a Developer",
@@ -44,6 +46,7 @@ export default function HeroSection() {
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [lang, setLang] = useState<LangType>("SQL");
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const currentValue = typeValues[index];
@@ -135,8 +138,10 @@ export default function HeroSection() {
         </Typography>
           
         <Box sx={{ mt: 4, display: "flex", alignItems: "center", gap: 2 }}>
+
           <Button
             variant="outlined"
+            onClick={() => setOpen(true)}
             sx={{
               borderColor: "#1976d2",
               color: "#000",
@@ -145,13 +150,10 @@ export default function HeroSection() {
               mt: 3,
               borderRadius: "10px",
               textTransform: "none",
-              "&:hover": {
-                backgroundColor: "#1976d2",
-                color: "#fff",
-              },
+              "&:hover": { backgroundColor: "#1976d2", color: "#fff" },
             }}
           >
-             Interesting Questions
+            Interesting Questions
           </Button>
           
           <IconButton
@@ -193,6 +195,51 @@ export default function HeroSection() {
           </IconButton>
         </Box>
       </Box>
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <Box
+          sx={{
+            background: "#fff",
+            borderRadius: 8,
+            p: 6,
+            maxWidth: 500,
+            mx: "auto",
+            mt: "20vh",
+            boxShadow: 24,
+            textAlign: "center",
+            position: "relative",
+          }}
+        >
+           <IconButton
+            onClick={() => setOpen(false)}
+            sx={{
+              position: "absolute",
+              top: 8,
+              right: 8,
+              color: "#333",
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+          <Typography variant="h6" fontStyle="italic" mb={1}>
+            Developer will develop this in next update... [Classic Excuse] 😅
+          </Typography>
+        
+          <Button
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=pratham.oza10@gmail.com"
+            startIcon={<MailOutlineIcon />}
+            target="_blank"
+            sx={{
+              backgroundColor: "#1976d2",
+              color: "#fff",
+              fontWeight: 600,
+              mt: 2,
+              "&:hover": { backgroundColor: "#0d47a1" },
+            }}
+          >
+            Suggest via Mail
+          </Button>
+        </Box>
+      </Modal>
 
       <Box
         sx={{
