@@ -13,7 +13,6 @@ import {
 import { LinkedIn, Email, PictureAsPdf } from "@mui/icons-material";
 import { Plane } from "lucide-react";
 import toast from "react-hot-toast";
-import { Markunread } from "@mui/icons-material";
 import PersonIcon from '@mui/icons-material/Person';
 import MessageIcon from '@mui/icons-material/Message';
 
