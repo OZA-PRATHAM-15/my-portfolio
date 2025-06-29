@@ -32,6 +32,8 @@ export default function ContactMeSection() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
+  const resumeUrl = process.env.NEXT_PUBLIC_RESUME_URL;
+
 useEffect(() => {
   const interval = setInterval(() => {
     setRotation((prev) => prev + 180);
@@ -160,25 +162,27 @@ const handleSubmit = async (e: React.FormEvent) => {
           <LinkedIn fontSize="small" />
         </IconButton>
         
-        <IconButton
-          href="https://firebasestorage.googleapis.com/v0/b/carbuyingapp-4883c.appspot.com/o/Resume%20Pratham_Oza.pdf?alt=media&token=f8c4d585-27b2-4499-9690-df00f630fadf"
-          target="_blank"
-          rel="noopener noreferrer"
-          download
-          sx={{
-            backgroundColor: "#fff",
-            color: "#333",
-            borderRadius: "30%",
-            mt: 3,
-            border: "2px solid #333",
-            padding: 1,
-            "&:hover": {
-              backgroundColor: "#f0f0f0",
-            },
-          }}
-        >
-          <PictureAsPdf fontSize="small" />
-        </IconButton>
+        {resumeUrl && (
+          <IconButton
+            href={resumeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            download
+            sx={{
+              backgroundColor: "#fff",
+              color: "#333",
+              borderRadius: "30%",
+              mt: 3,
+              border: "2px solid #333",
+              padding: 1,
+              "&:hover": {
+                backgroundColor: "#f0f0f0",
+              },
+            }}
+          >
+            <PictureAsPdf fontSize="small" />
+          </IconButton>
+        )}
       </Box>
 
         <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>

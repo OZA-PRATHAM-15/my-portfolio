@@ -121,7 +121,7 @@ export default function ProjectSection(): React.ReactElement {
       });
       setActiveIndex(currentIndexRef.current % projectData.length);
     }, 2000);
-  }, [stepsPossible, projectData.length]);
+  }, [stepsPossible]);
 
   useEffect(() => {
     currentIndexRef.current = activeIndex;
