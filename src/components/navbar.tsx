@@ -79,11 +79,11 @@ export default function Navbar() {
       <Box
         sx={{
           position: "fixed",
-          top: 0,
+          top: 2,
           right: 0,
           left: 0,
           zIndex: 1300,
-          bgcolor: "background.paper",
+          backgroundImage: (theme) => theme.palette.background.paper,
           px: 2,
           py: 1.2,
           display: "flex",
@@ -103,7 +103,7 @@ export default function Navbar() {
               sx={{
                 fontSize: 14,
                 fontWeight: 600,
-                color: "#555",
+                color: "#000",
                 fontFamily: `"Inter", "Poppins", sans-serif`,
               }}
             >
@@ -134,7 +134,7 @@ export default function Navbar() {
             sx: {
               width: "40vw",
               height: "100vh",
-              bgcolor: "background.default",
+              backgroundImage: (theme) => theme.palette.background.paper,
               p: 2,
               pt: 10,
               zIndex: 1400,

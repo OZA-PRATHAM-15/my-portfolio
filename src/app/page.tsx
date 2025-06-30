@@ -32,7 +32,7 @@ export default function Home() {
       </div>
       <section id="home">
         <div suppressHydrationWarning>
-          <Box sx={{ mt: { xs: 2, sm: 1, md: 1 } }}>
+          <Box sx={{ mt: { xs: 1, sm: 1, md: 1 }, }}>
             <HeroSection />
           </Box>
         </div>

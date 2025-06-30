@@ -1,8 +1,12 @@
 .cardWrapper {
   perspective: 1200px;
-  height: 280px;
+  height: 60vh;
+  width: 40vh;
   position: relative;
-  transform: translateY(-70px) translateX(-30px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .card {
@@ -15,8 +19,8 @@
 
 .face {
   position: absolute;
-  width: 99%;
-  height: 150%;
+  width: 100%;
+  height: 100%;
   backface-visibility: hidden;
   background: url('https://firebasestorage.googleapis.com/v0/b/carbuyingapp-4883c.appspot.com/o/Black%20and%20White%20Minimalist%20Blank%20A4%20Document%20Landscape.png?alt=media&token=36ff3cd1-fd61-410f-85c2-f6c03be84bee') center/cover no-repeat;
   border-radius: 16px;
@@ -38,10 +42,25 @@
 }
 
 .face b {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 2.3rem;
 }
 
 .back {
   transform: rotateY(180deg);
 }
+
+@media (max-width: 900px) {
+  .cardWrapper {
+    height: 28vh;
+    width: 50vh;
+  }
+  .face {
+    height: 89%;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
+    font-size: 1.5rem;
+  }
+}
+

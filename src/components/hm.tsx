@@ -71,7 +71,7 @@ export default function HonorableMentionsSection() {
 <Box
   sx={{
     columnCount: {
-      xs: 1,
+      xs: 2,
       sm: 2,
       md: 4,
     },

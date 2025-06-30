@@ -106,7 +106,7 @@ const handleSubmit = async (e: React.FormEvent) => {
         fontFamily: `"Poppins", sans-serif`,
       }}
     >
-      <Box className={styles.cardWrapper} sx={{ width: isMobile ? "100%" : "45%" }}>
+      <Box className={styles.cardWrapper} sx={{ width: { xs: "100%", md: "45%", sm: "50%" }, display: "flex", justifyContent: "center", alignItems: "center" }}>
         <div
           className={styles.card}
           style={{ transform: `rotateY(${rotation}deg)` }}

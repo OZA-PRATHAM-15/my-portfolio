@@ -10,7 +10,7 @@ const theme = createTheme({
     },
     background: {
       default: "linear-gradient(to bottom,rgb(221, 231, 235),rgb(255, 255, 255))",
-      paper: "linear-gradient(to bottom,rgb(255, 255, 255),rgb(255, 255, 255))",
+      paper: "linear-gradient(to bottom,rgb(229, 241, 241),rgb(255, 255, 255))",
     },
     text: {
       primary: "#181818",

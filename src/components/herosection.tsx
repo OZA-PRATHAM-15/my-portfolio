@@ -77,12 +77,12 @@ export default function HeroSection() {
   return (
     <Box
       sx={{
-        pt: { xs: 12, sm: 14, md: 18 },
-        px: { xs: 3, sm: 6, md: 10 },
+        pt: { xs: 18, sm: 14, md: 18 },
+        px: { xs: 1, sm: 6, md: 10 },
         pb: 6,
         display: "flex",
         flexDirection: { xs: "row", sm: "row", md: "row" },
-        gap: { xs: 1, sm: 8, md: 4 },
+        gap: { xs: 2, sm: 8, md: 4 },
         alignItems: "flex-start",
         justifyContent: "flex-start",
         flexWrap: "wrap",
@@ -259,7 +259,7 @@ export default function HeroSection() {
             justifyContent: "space-between",
             px: 2,
             py: 1,
-            backgroundColor: "#2d2d2d",
+            backgroundColor: "#000",
           }}
         >
           <Box sx={{ display: "flex", gap: 1 }}>
@@ -277,14 +277,14 @@ export default function HeroSection() {
               fontFamily: "Courier New, monospace",
               backgroundColor: "#333",
               borderRadius: 1,
-              px: 1.5,
+              px: 2,
               '&::before': { borderBottom: 'none' },
               '&::after': { borderBottom: 'none' },
             }}
             disableUnderline
           >
             {Object.keys(codeSnippets).map((lang) => (
-              <MenuItem key={lang} value={lang} sx={{ color: "#111" }}>
+              <MenuItem key={lang} value={lang} sx={{ color: "#fff", "&:hover": { backgroundColor: "#000" } }}>
                 {lang}
               </MenuItem>
             ))}
@@ -296,7 +296,7 @@ export default function HeroSection() {
             fontSize: { xs: "0.85rem", sm: "1rem" },
             color: "#d4d4d4",
             px: 3,
-            py: 4,
+            py: { xs: 2, sm: 4, md: 3 },
             whiteSpace: "pre-wrap",
             wordBreak: "break-word",
             borderBottom: "1px solid #444",
