@@ -9,6 +9,7 @@ import { Box } from "@mui/material";
 import dynamic from "next/dynamic";
 import HonorableMentionsSection from "@/components/hm";
 import ContactMeSection from "@/components/contactme";
+import Cookie from "@/components/cookie";
 
 const Navbar = dynamic(() => import("@/components/navbar"), { ssr: false });
 
@@ -79,6 +80,7 @@ export default function Home() {
           </Box>
         </div>
       </section>
+      <Cookie />
       </Box>
   );
 }

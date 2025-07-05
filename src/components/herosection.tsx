@@ -300,7 +300,7 @@ export default function HeroSection() {
             whiteSpace: "pre-wrap",
             wordBreak: "break-word",
             borderBottom: "1px solid #444",
-            height: "220px",
+            height: { xs: "240px", sm: "300px", md: "220px" },
           }}
         >
           {codeLines.map((line: string, i: number) => (
