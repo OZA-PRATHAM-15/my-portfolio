@@ -32,7 +32,7 @@ const highlights = [
 
   {
     title: "Github Wrap-up 2024",
-    caption: "🏆 Built an AI model that won 2nd place at IEEE Hackathon 2023!",
+    caption: "🏆 Achieved 100+ commits in 2024 on GitHub!",
     image:"https://firebasestorage.googleapis.com/v0/b/carbuyingapp-4883c.appspot.com/o/git-wrapped-OZA-PRATHAM-15.png?alt=media&token=8ac667f5-273b-4c22-8990-88d506a4c8f2"
   },
 

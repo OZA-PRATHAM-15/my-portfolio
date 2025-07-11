@@ -1,29 +1,20 @@
-"use client";
-import { ThemeProvider, CssBaseline} from "@mui/material";
-import theme from "@/theme/theme";
-import "../app/globals.css";
-import ProgressBar from "@/components/progressbar";
-import { ReactNode } from "react";
-import { Toaster } from "react-hot-toast";
+import Providers from "@/components/providers";
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export const metadata = {
+  title: "Pratham Oza — Portfolio",
+  description: "Creative Developer Portfolio",
+};
 
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <title>Pratham Oza — Portfolio</title>
+        <meta name="description" content="Creative Developer Portfolio" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
+      </head>
       <body>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/dheereshagrwal/coloured-icons@master/src/app/ci.min.css"
-        />
-
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <ProgressBar />
-          <Toaster position="bottom-right" reverseOrder={false} />
-          <div suppressHydrationWarning>
-          {children}
-          </div>
-        </ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

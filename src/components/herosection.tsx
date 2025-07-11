@@ -4,8 +4,7 @@ import { Box, Typography, MenuItem, Select, Button,IconButton, Modal } from "@mu
 import { useEffect, useState } from "react";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import CloseIcon from "@mui/icons-material/Close";
+import Quiz from "./quiz";
 
 const typeValues = [
   "a Developer",
@@ -95,7 +94,7 @@ export default function HeroSection() {
             fontWeight: 800,
             fontFamily: `"Inter", "Poppins", sans-serif`,
             fontSize: { xs: "1.2rem", sm: "2.5rem", md: "3rem" },
-            background: "linear-gradient(to right, #0f0f0f, #2c2c2c)",
+            background: "linear-gradient(to right,rgb(52, 35, 35), #2c2c2c)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
           }}
@@ -198,46 +197,13 @@ export default function HeroSection() {
       <Modal open={open} onClose={() => setOpen(false)}>
         <Box
           sx={{
-            background: "#fff",
-            borderRadius: 8,
-            p: 6,
-            maxWidth: 500,
-            mx: "auto",
-            mt: "20vh",
-            boxShadow: 24,
-            textAlign: "center",
-            position: "relative",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100vh",
           }}
         >
-           <IconButton
-            onClick={() => setOpen(false)}
-            sx={{
-              position: "absolute",
-              top: 8,
-              right: 8,
-              color: "#333",
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-          <Typography variant="h6" fontStyle="italic" mb={1}>
-            Developer will develop this in next update... [Classic Excuse] 😅
-          </Typography>
-        
-          <Button
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=pratham.oza10@gmail.com"
-            startIcon={<MailOutlineIcon />}
-            target="_blank"
-            sx={{
-              backgroundColor: "#1976d2",
-              color: "#fff",
-              fontWeight: 600,
-              mt: 2,
-              "&:hover": { backgroundColor: "#0d47a1" },
-            }}
-          >
-            Suggest via Mail
-          </Button>
+          <Quiz closeAction={() => setOpen(false)} />
         </Box>
       </Modal>
 
