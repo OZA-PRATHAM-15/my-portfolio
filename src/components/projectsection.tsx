@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import {
   Box,
@@ -53,10 +52,10 @@ const projectData = [
     title: "Car Dealership Website",
     image:
       "https://firebasestorage.googleapis.com/v0/b/carbuyingapp-4883c.appspot.com/o/Screenshot%202025-06-08%20124614.png?alt=media&token=f2d5087c-6433-4860-a8d4-d64ca1cd2306",
-    liveLink: "NA",
+    liveLink: "https://next-js-car-buying-app.vercel.app/",
     githubLink: "https://github.com/user/ecommerce",
     variant: "landscape",
-    tech: ["ReactJS", "NodeJS", "MongoDB", "Express"],
+    tech: ["NextJS", "NodeJS", "MongoDB", "Python", "Flask"],
     description: [
       "A full-stack web application for car dealership with AI-Bot integration, real-time chats, advanced analytics, and user-friendly interface.",
     ]

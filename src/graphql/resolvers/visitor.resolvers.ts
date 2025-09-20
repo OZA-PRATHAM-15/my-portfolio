@@ -1,7 +1,7 @@
-import { logVisitor } from "@/db/visitor.service";
+import { logVisitor } from "@/db/services/visitor.service";
 import type { ConsentStatus } from "@/db/schema";
 
-export const resolvers = {
+export const VisitorResolvers = {
   Mutation: {
     logVisitor: async (
       _: unknown,

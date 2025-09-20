@@ -1,4 +1,6 @@
 import Providers from "@/components/providers";
+import ProgressBar from "@/components/progressbar";
+import "@/app/globals.css";
 
 export const metadata = {
   title: "Pratham Oza — Portfolio",
@@ -14,6 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
       </head>
       <body>
+        <ProgressBar />
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -1,5 +1,5 @@
-import { supabase } from "./supabase";
-import type { ConsentStatus, VisitorLog } from "./schema";
+import { supabase } from "../supabase";
+import type { ConsentStatus, VisitorLog } from "../schema";
 
 export const logVisitor = async (
   ip: string,

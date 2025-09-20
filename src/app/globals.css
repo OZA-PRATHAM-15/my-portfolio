@@ -1,32 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-body {
-  font-family: 'Arial', sans-serif;
+html{
+  height: 100%;
 }
-
-html, body {
+body {
+  font-family: 'Inter', 'Roboto', 'Arial', sans-serif;
   background: #fff;
   color: #181818;
-  font-family: 'Inter', 'Roboto', 'Arial', sans-serif;
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  height: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  width: 0 !important;
-  height: 0 !important;
-  background: transparent !important;
-}
-
-
-html, body {
-  scrollbar-width: none !important;
-  -ms-overflow-style: none !important;
+  display: none;
 }
 
 .swiper-wrapper {
-    overflow: visible !important;
+  overflow: visible !important;
 }
-

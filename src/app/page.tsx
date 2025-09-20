@@ -80,6 +80,7 @@ export default function Home() {
           </Box>
         </div>
       </section>
+
       <Cookie />
       </Box>
   );

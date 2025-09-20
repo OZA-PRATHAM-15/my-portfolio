@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState } from "react";
 import {
   Typography,
   Button,
@@ -14,12 +14,15 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SendIcon from "@mui/icons-material/Send";
 import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
 import { AnimatePresence, motion } from "framer-motion";
+import Registration from "./registration";
 
 export default function Quiz({ closeAction }: { closeAction: () => void }) {
   const [step, setStep] = useState(0);
   const [honest, setHonest] = useState(false);
   const [cheat, setCheat] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [showFinalMessage, setShowFinalMessage] = useState(false);
+  const [showRegistration, setShowRegistration] = useState(false);
 
   const messages = [
     "⚠️ Heads up! This probably won't boost your IQ, but it'll definitely confuse you in hilarious ways. Proceed with caution... or curiosity.",
@@ -42,8 +45,7 @@ export default function Quiz({ closeAction }: { closeAction: () => void }) {
       sx={{
         p: { xs: 3, sm: 4 },
         minHeight: { xs: 350, sm: 450, md: 500 },
-        width: "100%",
-        maxWidth: 600,
+        width: { xs: "90%", sm: "80%", md: "40%" },
         mx: "auto",
         textAlign: "center",
         borderRadius: 3,
@@ -66,12 +68,14 @@ export default function Quiz({ closeAction }: { closeAction: () => void }) {
         <CloseIcon />
       </IconButton>
 
-      <Stack direction="row" spacing={1} justifyContent="center" alignItems="center" sx={{ mb: 2 }}>
-        <EmojiObjectsIcon color="primary" />
-        <Typography variant="h6" fontWeight="bold">
-          Ready for some nonsense?
-        </Typography>
-      </Stack>
+      {!showRegistration && (
+        <Stack direction="row" spacing={1} justifyContent="center" alignItems="center" sx={{ mb: 2 }}>
+          <EmojiObjectsIcon color="primary" />
+          <Typography variant="h6" fontWeight="bold">
+      Ready for some nonsense?
+          </Typography>
+        </Stack>
+      )}
 
       <Box
         sx={{
@@ -84,92 +88,98 @@ export default function Quiz({ closeAction }: { closeAction: () => void }) {
         }}
       >
         <AnimatePresence mode="wait">
-          {!showFinalMessage ? (
+           {showRegistration ? (
+            <Registration
+              onRegisterAction={(userId) => {
+                console.log("Quiz user created:", userId);
+              }}
+            />
+          ) : !showFinalMessage ? (
             step < 3 ? (
               <motion.div
                 key={step}
                 initial={{ x: 100, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -100, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Typography variant="h6" sx={{ fontSize: { xs: "1rem", sm: "1.2rem" } }}>
-                  {messages[step]}
-                </Typography>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="instructions"
-                initial={{ x: 100, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: -100, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                style={{ width: "100%" }}
-              >
-                {instructions.map((rule, i) => (
-                  <Typography
-                    key={i}
-                    sx={{ textAlign: "left", mb: 1, fontSize: { xs: "0.9rem", sm: "1rem" } }}
-                  >
-                    {rule}
-                  </Typography>
-                ))}
+                 transition={{ duration: 0.3 }} 
+               >
+                 <Typography variant="h6" sx={{ fontSize: { xs: "1rem", sm: "1.2rem" } }}>
+                   {messages[step]}
+                 </Typography>
+               </motion.div>
+             ) : (
+               <motion.div
+                 key="instructions"
+                 initial={{ x: 100, opacity: 0 }}
+                 animate={{ x: 0, opacity: 1 }}
+                 exit={{ x: -100, opacity: 0 }}
+                 transition={{ duration: 0.3 }}
+                 style={{ width: "100%" }}
+               >
+                 {instructions.map((rule, i) => (
+                   <Typography
+                     key={i}
+                     sx={{ textAlign: "left", mb: 1, fontSize: { xs: "0.9rem", sm: "1rem" } }}
+                   >
+                     {rule}
+                   </Typography>
+                 ))}
 
-                <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", mt: 2 }}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={cheat}
-                        onChange={() => {
-                          setCheat(!cheat);
-                          setHonest(false);
-                        }}
-                      />
-                    }
-                    label="I will cheat 😈"
-                  />
-                  {cheat && (
-                    <Typography variant="caption" sx={{ color: "#888", fontStyle: "italic", ml: 4 }}>
-                      👀 Be honest... The leaderboard knows all!
-                    </Typography>
-                  )}
+                 <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start", mt: 2 }}>
+                   <FormControlLabel
+                     control={
+                       <Checkbox
+                         checked={cheat}
+                         onChange={() => {
+                           setCheat(!cheat);
+                           setHonest(false);
+                         }}
+                       />
+                     }
+                     label="I will cheat 😈"
+                   />
+                   {cheat && (
+                     <Typography variant="caption" sx={{ color: "#888", fontStyle: "italic", ml: 4 }}>
+                       👀 Be honest... The leaderboard knows all!
+                     </Typography>
+                   )}
 
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={honest}
-                        onChange={() => {
-                          setHonest(!honest);
-                          setCheat(false);
-                        }}
-                      />
-                    }
-                    label="I will be honest 🙌"
-                  />
-                </Box>
-              </motion.div>
-            )
-          ) : (
-            <motion.div
-              key="finalMessage"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              style={{ width: "100%" }}
-            >
-              <Typography variant="h6" sx={{ mb: 2 }}>
-                😅 Developer is Googling quiz questions... Please enjoy the awkward silence!
-              </Typography>
-              <Button variant="contained" onClick={closeAction}>
-                Close
-              </Button>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                   <FormControlLabel
+                     control={
+                       <Checkbox
+                         checked={honest}
+                         onChange={() => {
+                           setHonest(!honest);
+                           setCheat(false);
+                         }}
+                       />
+                     }
+                     label="I will be honest 🙌"
+                   />
+                 </Box>
+               </motion.div>
+             )
+           ) : (
+             <motion.div
+               key="finalMessage"
+               initial={{ scale: 0.8, opacity: 0 }}
+               animate={{ scale: 1, opacity: 1 }}
+               exit={{ scale: 0.8, opacity: 0 }}
+               transition={{ duration: 0.4 }}
+               style={{ width: "100%" }}
+             >
+               <Typography variant="h6" sx={{ mb: 2 }}>
+                 😅 Developer is Googling quiz questions... Please enjoy the awkward silence!
+               </Typography>
+               <Button variant="contained" onClick={closeAction}>
+                 Close
+               </Button>
+             </motion.div>
+           )}
+         </AnimatePresence>
       </Box>
 
-      {!showFinalMessage && (
+     {!showFinalMessage && !showRegistration && (
         <Box sx={{ display: "flex", justifyContent: "center", gap: 1, mb: 2 }}>
           {messages.map((_, i) => (
             <Box
@@ -188,7 +198,7 @@ export default function Quiz({ closeAction }: { closeAction: () => void }) {
         </Box>
       )}
 
-      {!showFinalMessage && (
+      {!showFinalMessage && !showRegistration && (
         <Box sx={{ display: "flex", justifyContent: step < 3 ? "space-between" : "center", mt: 2 }}>
           {step < 3 && (
             <>
@@ -222,7 +232,7 @@ export default function Quiz({ closeAction }: { closeAction: () => void }) {
               variant="contained"
               endIcon={<SendIcon />}
               disabled={!honest}
-              onClick={() => setShowFinalMessage(true)}
+              onClick={() => setShowRegistration(true)}
             >
               Confirm
             </Button>

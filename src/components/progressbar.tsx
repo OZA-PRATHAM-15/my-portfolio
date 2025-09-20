@@ -3,21 +3,22 @@ import { useEffect, useState } from "react";
 
 export default function ProgressBar() {
   const [width, setWidth] = useState(0);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const onScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+      const docHeight = scrollHeight - clientHeight;
       const scrolled = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       setWidth(scrolled);
     };
     window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener("resize", onScroll);
+    onScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
-
-  if (!mounted) return null;
 
   return (
     <div
@@ -25,11 +26,12 @@ export default function ProgressBar() {
         position: "fixed",
         top: 0,
         left: 0,
-        width: `${width}%`,
-        height: 5,
+        width: `${width}%`, 
+        height: "6px",
         background: "#1976d2",
-        zIndex: 1200,
+        zIndex: 99999,
         transition: "width 0.15s ease",
+        pointerEvents: "none",
       }}
     />
   );
