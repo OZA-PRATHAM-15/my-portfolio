@@ -79,7 +79,7 @@ export default function Navbar() {
       <Box
         sx={{
           position: "fixed",
-          top: 2,
+          top: 0,
           right: 0,
           left: 0,
           zIndex: 1300,

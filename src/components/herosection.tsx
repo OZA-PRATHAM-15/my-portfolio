@@ -137,25 +137,45 @@ export default function HeroSection() {
         </Typography>
           
         <Box sx={{ mt: 4, display: "flex", alignItems: "center", gap: 2 }}>
-
-          <Button
-            variant="outlined"
-            onClick={() => setOpen(true)}
+        <Button
+          variant="outlined"
+          onClick={() => setOpen(true)}
+          sx={{
+            position: "relative",
+            borderColor: "#1976d2",
+            color: "#000",
+            fontWeight: 800,
+            borderWidth: "3px",
+            mt: 3,
+            borderRadius: "10px",
+            textTransform: "none",
+            "&:hover": { backgroundColor: "#1976d2", color: "#fff" },
+          }}
+        >
+          Quiz
+          <Box
+            component="span"
             sx={{
-              borderColor: "#1976d2",
-              color: "#000",
-              fontWeight: 800,
-              borderWidth: "3px",
-              mt: 3,
-              borderRadius: "10px",
-              textTransform: "none",
-              "&:hover": { backgroundColor: "#1976d2", color: "#fff" },
+              position: "absolute",
+              top: -10,
+              right: -10,
+              fontSize: "7px",
+              background: "#e91e63",
+              color: "#fff",
+              px: 0.6,
+              py: 0.3,
+              borderRadius: "4px",
+              transform: "rotate(8deg)",
+              fontWeight: 700,
+              lineHeight: 1.1,
+              textAlign: "center",
+              whiteSpace: "nowrap",
             }}
           >
-            Interesting Questions
-          </Button>
-          
-          <IconButton
+            Under<br />Development
+          </Box>
+        </Button>
+            <IconButton
             href="https://github.com/OZA-PRATHAM-15"
             target="_blank"
             rel="noopener noreferrer"

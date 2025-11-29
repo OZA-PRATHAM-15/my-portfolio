@@ -14,6 +14,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <title>Pratham Oza — Portfolio</title>
         <meta name="description" content="Creative Developer Portfolio" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any" />
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/dheereshag/coloured-icons@master/app/ci.min.css"
+        />
       </head>
       <body>
         <ProgressBar />

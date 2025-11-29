@@ -40,7 +40,11 @@ const funnyLoadingMessages = [
   "Brewing some brain juice 🧠💭",
 ];
 
-export default function Registration({ onRegisterAction }: { onRegisterAction: (userId: string) => void }) {
+export default function Registration({
+  onRegisterAction,
+}: {
+  onRegisterAction: (userId: string) => void;
+}) {
   const [name, setName] = useState<string>("");
   const [avatarId, setAvatarId] = useState<string | null>(null);
   const [categoryId, setCategoryId] = useState<string | null>(null);
@@ -59,7 +63,9 @@ export default function Registration({ onRegisterAction }: { onRegisterAction: (
         const avatarRes = await fetch("/api/graphql", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query: `query { getAllAvatars { id url } }` }),
+          body: JSON.stringify({
+            query: `query { getAllAvatars { id url } }`,
+          }),
         });
         const avatarData = await avatarRes.json();
         setAvatars(avatarData.data.getAllAvatars || []);
@@ -67,7 +73,9 @@ export default function Registration({ onRegisterAction }: { onRegisterAction: (
         const categoryRes = await fetch("/api/graphql", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ query: `query { getAllCategories { id name } }` }),
+          body: JSON.stringify({
+            query: `query { getAllCategories { id name } }`,
+          }),
         });
         const categoryData = await categoryRes.json();
         setCategories(categoryData.data.getAllCategories || []);
@@ -88,7 +96,9 @@ export default function Registration({ onRegisterAction }: { onRegisterAction: (
     if (!initialLoading) return;
 
     const interval = setInterval(() => {
-      setFunnyIndex((prev) => (prev + 1) % funnyLoadingMessages.length);
+      setFunnyIndex(
+        (prev) => (prev + 1) % funnyLoadingMessages.length
+      );
     }, 2500);
 
     const progressInterval = setInterval(() => {
@@ -103,46 +113,71 @@ export default function Registration({ onRegisterAction }: { onRegisterAction: (
 
   const validateName = (name: string): boolean => {
     const blacklist = [/admin/i, /god/i, /devil/i, /hacker/i];
-    return name.length >= 2 && name.length <= 20 && !blacklist.some((rx) => rx.test(name));
+    return (
+      name.length >= 2 &&
+      name.length <= 20 &&
+      !blacklist.some((rx) => rx.test(name))
+    );
   };
 
   const handleSubmit = async () => {
     if (!validateName(name) || !avatarId || !categoryId) return;
+
     setLoading(true);
-    /*try {
+
+    try {
       const res = await fetch("/api/quiz-users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, avatar_id: avatarId, category_id: categoryId }),
+        body: JSON.stringify({
+          name,
+          avatar_id: avatarId,
+          category_id: categoryId,
+        }),
       });
+
       const result: QuizUserResponse = await res.json();
-      setLoading(false);
-      if (result.success && result.data?.id) onRegisterAction(result.data.id);
-      else setError("Something went wrong. Please try again.");
+
+      if (result.success && result.data?.id) {
+        onRegisterAction(result.data.id);
+
+        setTimeout(() => {
+          setLoading(false);
+          setShowQuiz(true);
+        }, 1000);
+      } else {
+        setError("Something went wrong. Please try again.");
+        setLoading(false);
+      }
     } catch (err) {
       console.error("Error creating quiz user:", err);
       setError("Failed to connect to server");
       setLoading(false);
     }
-  };*/
-    setTimeout(() => {
-    setLoading(false);
-    setShowQuiz(true);
-  }, 1000);
-};
+  };
 
-if (showQuiz) return (
-  <Questions
-    name={name}
-    avatarId={avatarId!}
-    categoryId={categoryId!}
-  />
-);
-
+  if (showQuiz) {
+    return (
+      <Questions
+        name={name}
+        avatarId={avatarId!}
+        categoryId={categoryId!}
+      />
+    );
+  }
 
   if (initialLoading) {
     return (
-      <Box sx={{ height: 400, display: "flex", flexDirection: "column", alignItems: "center", px: 3, py:15 }}>
+      <Box
+        sx={{
+          height: 400,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          px: 3,
+          py: 15,
+        }}
+      >
         <LinearProgress
           variant="determinate"
           value={progress}
@@ -159,7 +194,11 @@ if (showQuiz) return (
             },
           }}
         />
-        <Typography variant="body1" fontWeight="bold" textAlign="center">
+        <Typography
+          variant="body1"
+          fontWeight="bold"
+          textAlign="center"
+        >
           {funnyLoadingMessages[funnyIndex]}
         </Typography>
       </Box>
@@ -173,7 +212,12 @@ if (showQuiz) return (
       exit={{ opacity: 0, y: -30 }}
       transition={{ duration: 0.4 }}
     >
-      <Typography variant="h5" fontWeight="bold" mb={2} textAlign="center">
+      <Typography
+        variant="h5"
+        fontWeight="bold"
+        mb={2}
+        textAlign="center"
+      >
         Registration
       </Typography>
 
@@ -190,7 +234,10 @@ if (showQuiz) return (
               sx={{
                 width: 70,
                 height: 70,
-                border: avatarId === av.id ? "3px solid #1976d2" : "2px solid transparent",
+                border:
+                  avatarId === av.id
+                    ? "3px solid #1976d2"
+                    : "2px solid transparent",
                 cursor: "pointer",
                 transition: "0.3s",
               }}
@@ -225,10 +272,17 @@ if (showQuiz) return (
         <Select
           value={categoryId || ""}
           label="Select Category"
-          onChange={(e) => setCategoryId(e.target.value)}
+          onChange={(e) =>
+            setCategoryId(e.target.value as string)
+          }
           MenuProps={{
             PaperProps: {
-              sx: { mt: 1, bgcolor: "white", maxHeight: 110, zIndex: 1500 },
+              sx: {
+                mt: 1,
+                bgcolor: "white",
+                maxHeight: 110,
+                zIndex: 1500,
+              },
             },
           }}
         >
@@ -245,7 +299,12 @@ if (showQuiz) return (
         <Button
           variant="contained"
           onClick={handleSubmit}
-          disabled={!validateName(name) || !avatarId || !categoryId || loading}
+          disabled={
+            !validateName(name) ||
+            !avatarId ||
+            !categoryId ||
+            loading
+          }
         >
           {loading ? "Starting..." : "Start Quiz"}
         </Button>

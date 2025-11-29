@@ -8,10 +8,6 @@ import { Toaster } from "react-hot-toast";
 export default function Providers({ children }: { children: ReactNode }) {
   return (
     <>
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/dheereshagrwal/coloured-icons@master/src/app/ci.min.css"
-      />
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <ProgressBar />
